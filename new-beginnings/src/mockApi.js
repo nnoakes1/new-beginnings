@@ -18,8 +18,8 @@ let users = {
     "KFG-123": {
       id: "KFG-123",
       name: "Natalie Noakes",
-      dob: "03/28/1997",
-      phoneNumber: "3163006078",
+      dob: "03/03/2003",
+      phoneNumber: "3133033033",
       address: "555 Amazing Developer St",
       trialStatus: trial_status.active
     },
