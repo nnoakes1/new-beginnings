@@ -49,13 +49,33 @@ export const getUsers = () => new Promise((resolve, reject) => {
     resolve(Object.values(users));
 });
 
-export const updateUser = (id, data) => 
-  new Promise((resolve, reject) => {
-    if (!users[id]) {
-      reject(new Error('User not found'));
+export const getUser = (id) => new Promise((resolve, reject) => {
+    const user = users[id];
+
+    if (!user) {
+      return reject(new Error('User not found'));
     }
 
+    resolve(users[id]);
+  });
+
+export const updateUser = (id, data) => new Promise((resolve, reject) => {
+    if (!users[id]) {
+      return reject(new Error('User not found'));
+    }
     users[id] = { ...users[id], ...data };
     resolve(users[id]);
 
 });
+
+export const deleteUser = (id) => new Promise((resolve, reject) => {
+    const { [id]: user, ...rest } = users;
+
+    if (!user) {
+      return reject(new Error('User not found'));
+    }
+
+    users = { ...rest };
+
+    return resolve(true);
+  });

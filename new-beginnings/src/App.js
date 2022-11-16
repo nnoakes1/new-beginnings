@@ -1,8 +1,9 @@
 import './App.css';
 import React from 'react';
 
-import { getUsers, updateUser } from './mockApi';
+import { getUsers, updateUser, deleteUser } from './mockApi';
 import { UserTable } from './components/userTable';
+import { Header } from './components/header';
 
 function App() {
   const [users, setUsers] = React.useState(null);
@@ -25,17 +26,24 @@ function App() {
     await callGetUsers();
   };
 
-  const editUser = async (id) => {
-    const user = users.find((user) => user.id === id);
-    console.log(user);
+  const editUser = async (id, data) => {
 
     try {
-      await updateUser(id, { });
+      await updateUser(id, data);
       await refetchUsers();
     } catch (error) {
       console.log(error);
     }
   };
+
+  const removeUser = async (id) => {
+    try {
+      await deleteUser(id);
+      await refetchUsers();
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   if (!users) {
     return null;
@@ -43,13 +51,10 @@ function App() {
 
   return (
     <div className="App">
-      <header className="new-beginnings-header">
-        {/* <img src={logo} className="App-logo" alt="logo" /> */}
-        <p>Welcome to New Beginnings!</p>
-      </header>
+      <Header/>
       <div className="main-body">
         <div className="user-table">
-          <UserTable users={users}/>
+          <UserTable users={users} updateUser={editUser} deleteUser={removeUser}/>
         </div>
       </div>
       

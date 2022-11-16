@@ -1,0 +1,31 @@
+.account-header {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.account-circle {
+    margin-right: 10px;
+}
+
+.edit-icon {
+    padding-right: 5px;
+}
+
+.modal-buttons {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: right;
+    padding: 10px;
+}
+
+.edit-modal-title {
+    padding: 10px;
+}
+
+.modal-element {
+    padding: 10px;
+}
+
+.modal-select-textfield {
+    width: 300px;
+}
