@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
 
-import { getUsers, updateUser, deleteUser } from './mockApi';
+import { getUsers, updateUser, createUser, deleteUser } from './mockApi';
 import { UserTable } from './components/userTable';
 import { Header } from './components/header';
 
@@ -36,6 +36,16 @@ function App() {
     }
   };
 
+  const addUser = async (data) => {
+
+    try {
+      await createUser(data);
+      await refetchUsers();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const removeUser = async (id) => {
     try {
       await deleteUser(id);
@@ -54,7 +64,7 @@ function App() {
       <Header/>
       <div className="main-body">
         <div className="user-table">
-          <UserTable users={users} updateUser={editUser} deleteUser={removeUser}/>
+          <UserTable users={users} updateUser={editUser} createUser={addUser} deleteUser={removeUser}/>
         </div>
       </div>
       

@@ -25,7 +25,7 @@ let users = {
     },
     "KFG-124": {
       id: "KFG-124",
-      name: "John Doe",
+      name: "John Dove",
       dob: "02/02/2001",
       phoneNumber: "5555555555",
       address: "111 User Ln",
@@ -33,7 +33,7 @@ let users = {
     },
     "KFG-125": {
       id: "KFG-125",
-      name: "Jack Doe",
+      name: "Jack Dough",
       dob: "03/03/2002",
       phoneNumber: "5555555555",
       address: "222 User Ln",
@@ -66,6 +66,17 @@ export const updateUser = (id, data) => new Promise((resolve, reject) => {
     users[id] = { ...users[id], ...data };
     resolve(users[id]);
 
+});
+
+export const createUser = (data) => new Promise((resolve, reject) => {
+    if (!data.id || !data.name || !data.dob || !data.phoneNumber || !data.address || !data.trialStatus) {
+      return reject(new Error('Not all information provided'));
+    }
+
+    const newUser = {...data };
+    users = { ...users, [data.id]: newUser };
+
+    return resolve(true);
 });
 
 export const deleteUser = (id) => new Promise((resolve, reject) => {

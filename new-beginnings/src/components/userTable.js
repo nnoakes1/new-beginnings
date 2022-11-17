@@ -1,12 +1,15 @@
+import './components.css';
+
 import React from 'react';
 
-import { TableContainer, Table, TableBody, TableHead, TableRow, Paper, Modal, Box } from '@mui/material';
+import { TableContainer, Table, TableBody, TableHead, TableRow, Paper, Modal, Box, Button } from '@mui/material';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import SearchComponent from "react-material-ui-searchbar";
 import { styled } from '@mui/material/styles';
 import { Edit, Delete } from '@mui/icons-material';
 
 import { EditModal } from './editModal';
+import { AddModal } from './addModal';
 
 const tableHeaders = ["Reference Number", "Name", "Date of Birth", "Phone Number", "Address", "Trial Status", ""];
 
@@ -36,12 +39,16 @@ export function UserTable(props) {
     const [rows, setRows] = React.useState(props.users);
     const [searched, setSearched] = React.useState("");
     const [open, setOpen] = React.useState(false);
+    const [addOpen, setAddOpen] = React.useState(false);
     const [editUser, setEditUser] = React.useState({});
     const handleOpen = (user) => {
         setOpen(true)
         setEditUser(user);
     };
     const handleClose = () => setOpen(false);
+
+    const handleAddOpen = () => setAddOpen(true);
+    const handleAddClose = () => setAddOpen(false);
   
     const requestSearch = (searchedVal) => {
       const filteredRows = props.users.filter((row) => {
@@ -56,11 +63,19 @@ export function UserTable(props) {
     return (
         <div>
             <Paper>
-                <SearchComponent
-                    placeholder='Search by Reference Number'
-                    value={searched}
-                    onChangeHandle={(searchVal) => requestSearch(searchVal)}
-                    />
+                <div className="user-table-top">
+                    <div className="user-table-searchbar">
+                        <SearchComponent
+                            placeholder='Search by Reference Number'
+                            value={searched}
+                            onChangeHandle={(searchVal) => requestSearch(searchVal)}
+                        />
+                    </div>
+                    <div className="user-table-middle"></div>
+                    <div className='user-table-add-user'>
+                        <Button variant="outlined" align="right" sx={{ height: "100%" }} onClick={handleAddOpen}>Add User</Button>
+                    </div>
+                </div>
                 <TableContainer>
                     <Table sx={{ minWidth: 250 }}>
                         <TableHead>
@@ -104,6 +119,14 @@ export function UserTable(props) {
             >
                 <Box sx={style}>
                     <EditModal user={editUser} saveEdit={props.updateUser} closeModal={handleClose}/>
+                </Box>
+            </Modal>
+            <Modal
+                open={addOpen}
+                onClose={handleAddClose}
+            >
+                <Box sx={style}>
+                    <AddModal addUser={props.createUser} closeModal={handleAddClose}/>
                 </Box>
             </Modal>
         </div>

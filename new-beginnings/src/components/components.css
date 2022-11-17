@@ -29,3 +29,16 @@
 .modal-select-textfield {
     width: 300px;
 }
+
+.user-table-searchbar {
+    width: 40% !important;
+}
+
+.user-table-middle {
+    width: 49% !important;
+}
+
+.user-table-top {
+    display: flex;
+    flex-flow: row wrap;
+}
