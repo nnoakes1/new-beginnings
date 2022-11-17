@@ -16,3 +16,10 @@ This is Natalie Noakes's completed project for Grail. It uses React and Node.
 - React, Node, npm
 - Material UI core & icons
 - react-material-ui-searchbar
+
+## Improvements for Future MVPs
+Here are some things I would add if I had more than 4 hours:
+- Add data validation to add and edit user modal fields
+- Ensure data is validated before allowing user to click 'Save' buttons
+- Enhance table filtering and sorting functionality
+- Enhance look and feel
